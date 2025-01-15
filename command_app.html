@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PHP Command Web App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        #output {
+            margin-top: 20px;
+            padding: 10px;
+            border: 1px solid #ccc;
+            background-color: #f9f9f9;
+            min-height: 40px;
+        }
+    </style>
+</head>
+<body>
+    <h1>PHP Command Web App</h1>
+    <div>
+        <input type="text" id="commandInput" placeholder="Enter command" style="width: 300px;">
+        <button id="submitBtn">Submit</button>
+    </div>
+    <div id="output"></div>
+
+    <script>
+        document.getElementById('submitBtn').addEventListener('click', function() {
+            const command = document.getElementById('commandInput').value.trim();
+            if (!command) {
+                alert("Please enter a command.");
+                return;
+            }
+
+            const [commandName, ...args] = command.split(' ');
+
+            if (!commandName) {
+                document.getElementById('output').innerText = 'Invalid command format.';
+                return;
+            }
+
+            // Perform Ajax request to server
+            fetch('command_handler.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ commandName, args })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('output').innerText = data.result || 'Error in command execution.';
+            })
+            .catch(error => {
+                document.getElementById('output').innerText = 'An error occurred.';
+            });
+        });
+    </script>
+</body>
+</html>
