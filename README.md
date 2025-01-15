@@ -9,9 +9,9 @@
 
 ## Implemented Commands:
 
-1. **add: adds numeric arguments**
-2. **sort-asc: sort arguments in ascending order.**
-3. **repo-desc: perform a GitHub API call using owner and repo arguments to return adescription of the repository.**
+1. **add:** adds numeric arguments
+2. **sort-asc:** sort arguments in ascending order.
+3. **repo-desc:** perform a GitHub API call using owner and repo arguments to return adescription of the repository.
 
 ## Example Usage:
 
